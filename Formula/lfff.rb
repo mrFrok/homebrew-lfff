@@ -26,7 +26,7 @@ class Lfff < Formula
     end
   end
 
-  depends_on "android-platform-tools"
+  depends_on cask: "android-platform-tools"
 
   def install
     bin.install "lfff"
