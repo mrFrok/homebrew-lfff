@@ -2,6 +2,7 @@ class Lfff < Formula
   desc "Free, open-source firmware flasher for Android A/B devices via fastboot"
   homepage "https://github.com/mrFrok/LibreFastbootFirmwareFlasher"
   version "2.0.1"
+  revision 1
   license "GPL-3.0-only"
 
   on_macos do
