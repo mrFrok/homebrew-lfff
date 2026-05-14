@@ -1,28 +1,28 @@
 class Lfff < Formula
   desc "Free, open-source firmware flasher for Android A/B devices via fastboot"
   homepage "https://github.com/mrFrok/LibreFastbootFirmwareFlasher"
-  version "2.0.2"
+  version "2.0.3"
   license "GPL-3.0-only"
 
   on_macos do
     on_arm do
       resource "cli" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-macos-aarch64.tar.gz"
-        sha256 "cb519542dfbdfb01f1f16ef5f79e3540b3d53a05d89add6c07bd1526c1e27ff1"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-macos-aarch64.tar.gz"
+        sha256 "38f2da96c9a02cc3353f06d93c47f91e4916d08b4109e7eabbfb905c461946fc"
       end
       resource "gui" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-gui-macos-aarch64.tar.gz"
-        sha256 "b67561934c3a887c082e3cbbeb2ba55eddd7c8432c5611de104a4c1cde51a16a"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-gui-macos-aarch64.tar.gz"
+        sha256 "a9f16c40113b222aa7ed961660e09bf8737896ab67b5596eaf964d1016bc0fe5"
       end
     end
     on_intel do
       resource "cli" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-macos-x86_64.tar.gz"
-        sha256 "e4219d2ccfd249e222fb887e41bdef5a955674a9c1370ab74f7955aeb76b5018"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-macos-x86_64.tar.gz"
+        sha256 "252e17d0b9d6c656f1f1f42ebce8a54367d453fafc7b390d5817f98a424ef0e0"
       end
       resource "gui" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-gui-macos-x86_64.tar.gz"
-        sha256 "521838d095822d737a600b5e29680f3b5d462194a50df1e5b8c3f14b8139ab36"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-gui-macos-x86_64.tar.gz"
+        sha256 "5bc5bb73f29374024215e72a16545dc1c87ed4fec07578ac384de4ceb825921c"
       end
     end
   end
@@ -30,29 +30,51 @@ class Lfff < Formula
   on_linux do
     on_arm do
       resource "cli" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-linux-aarch64.tar.gz"
-        sha256 "d401bdc8ec2734f55fbd8d225544dbbd289218720070dca2875babac1f79806f"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-linux-aarch64.tar.gz"
+        sha256 "e4f99ea4511b104841ebf49d72a40f24db8da081d7140f1c51fe1bbc5dc7d1ca"
       end
       resource "gui" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-gui-linux-aarch64.tar.gz"
-        sha256 "0c976e4dc3d89181715b95f0c1e7eeeaa88707d6c5c91dd6248ac04c7f575227"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-gui-linux-aarch64.tar.gz"
+        sha256 "4e0bc8f03293ef9f5eea296c6e42e65841d18801ce0ccc6f04d6d50c14a046de"
       end
     end
     on_intel do
       resource "cli" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-linux-x86_64.tar.gz"
-        sha256 "9a86698f81a885d3990db5df132a6ce89bac44aa606819bfae463646bc0a0fe1"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-linux-x86_64.tar.gz"
+        sha256 "72f4acbb2cc9702eb05020abff47852ec859088f97337e34d0a2d299c9017f29"
       end
       resource "gui" do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.2/lfff-gui-linux-x86_64.tar.gz"
-        sha256 "7878201d8576140fa0e32417964090619d57bf75f618cae5d094ab69f58f9322"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.3/lfff-gui-linux-x86_64.tar.gz"
+        sha256 "268858d232624b2028e98730dd0837c3c11d5f3fcf96f10ad7c2d8a7b6302a4e"
       end
     end
   end
 
   def install
     resource("cli").stage { bin.install "lfff" }
-    resource("gui").stage { bin.install "lfff-gui" }
+    resource("gui").stage do |stage|
+      if OS.mac?
+        # Archive contains LFFF.app bundle from v2.0.3+
+        if (stage.staging.tmpdir + "LFFF.app").exist?
+          bin.install "LFFF.app/Contents/MacOS/lfff-gui"
+          prefix.install "LFFF.app"
+        else
+          # Fallback: raw binary (v2.0.2 and earlier)
+          bin.install "lfff-gui"
+        end
+      else
+        bin.install "lfff-gui"
+      end
+    end
+  end
+
+  def caveats
+    if OS.mac?
+      <<~EOS
+        LFFF.app is installed in the Cellar. To use it from Launchpad / Finder:
+          cp -r #{prefix}/LFFF.app /Applications
+      EOS
+    end
   end
 
   test do
