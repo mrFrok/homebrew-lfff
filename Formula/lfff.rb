@@ -55,7 +55,7 @@ class Lfff < Formula
     resource("gui").stage do |stage|
       if OS.mac?
         # Archive contains LFFF.app bundle from v2.0.3+
-        if (stage.staging.tmpdir + "LFFF.app").exist?
+        if (stage + "LFFF.app").exist?
           bin.install "LFFF.app/Contents/MacOS/lfff-gui"
           prefix.install "LFFF.app"
         else
