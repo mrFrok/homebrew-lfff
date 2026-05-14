@@ -4,25 +4,29 @@ class Lfff < Formula
   version "2.0.4"
   license "GPL-3.0-only"
 
-  # Base URL (macOS ARM) — overridden per platform below
   url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-macos-aarch64.tar.gz"
   sha256 "d7587947ea9a0e46b1d6734aa57bbf35465abda2058570f12dfacbd93e44db30"
 
-  on_macos do
-    on_intel do
-      url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-macos-x86_64.tar.gz"
-      sha256 "adcc8ef357e9ed8d791c7315678c9f7bffad0545e4331a0d1ce9868ffe6b7c82"
+  resource "cli" do
+    on_macos do
+      on_arm do
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-macos-aarch64.tar.gz"
+        sha256 "d7587947ea9a0e46b1d6734aa57bbf35465abda2058570f12dfacbd93e44db30"
+      end
+      on_intel do
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-macos-x86_64.tar.gz"
+        sha256 "adcc8ef357e9ed8d791c7315678c9f7bffad0545e4331a0d1ce9868ffe6b7c82"
+      end
     end
-  end
-
-  on_linux do
-    on_arm do
-      url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-linux-aarch64.tar.gz"
-      sha256 "3a6f93115a551311c288085c9acf8b4aa1752be186908f233eacbc1c05b7927d"
-    end
-    on_intel do
-      url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-linux-x86_64.tar.gz"
-      sha256 "178931c71490f675abbb2eba32648d73c7265b0480f42b9dae6cf6a6076e2e21"
+    on_linux do
+      on_arm do
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-linux-aarch64.tar.gz"
+        sha256 "3a6f93115a551311c288085c9acf8b4aa1752be186908f233eacbc1c05b7927d"
+      end
+      on_intel do
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.0.4/lfff-linux-x86_64.tar.gz"
+        sha256 "178931c71490f675abbb2eba32648d73c7265b0480f42b9dae6cf6a6076e2e21"
+      end
     end
   end
 
@@ -50,7 +54,7 @@ class Lfff < Formula
   end
 
   def install
-    bin.install "lfff"
+    resource("cli").stage { bin.install "lfff" }
     resource("gui").stage do |stage|
       if OS.mac? && (stage + "LibreFastbootFirmwareFlasher.app").exist?
         bin.install "LibreFastbootFirmwareFlasher.app/Contents/MacOS/lfff-gui"
