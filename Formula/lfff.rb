@@ -1,30 +1,30 @@
 class Lfff < Formula
   desc "Free, open-source firmware flasher for Android A/B devices via fastboot"
   homepage "https://github.com/mrFrok/LibreFastbootFirmwareFlasher"
-  version "2.9.4"
+  version "3.0.0"
 
-  url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-macos-aarch64.tar.gz"
-  sha256 "f850d01ac3533d802beab06bbd8f59061b78e2ff341f8a136482c0b40c86dafd"
+  url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-macos-aarch64.tar.gz"
+  sha256 "7116da5b235df8ac61cca769e20e9996ff2f313f0b0af9935ff35aace73bbc4d"
 
   resource "cli" do
     on_macos do
       on_arm do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-macos-aarch64.tar.gz"
-        sha256 "f850d01ac3533d802beab06bbd8f59061b78e2ff341f8a136482c0b40c86dafd"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-macos-aarch64.tar.gz"
+        sha256 "7116da5b235df8ac61cca769e20e9996ff2f313f0b0af9935ff35aace73bbc4d"
       end
       on_intel do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-macos-x86_64.tar.gz"
-        sha256 "e653f1245214079447fade00f5a0752dabd3e5bb6335213fcbf9b2e1869d64dc"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-macos-x86_64.tar.gz"
+        sha256 "841f06e10c213f748b47fdd5dcbb5eb2f9da1384db0d7666623a75c36d539d0f"
       end
     end
     on_linux do
       on_arm do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-linux-aarch64.tar.gz"
-        sha256 "2e6275e1e00ad5317e3076996d706005bcc836992eed28208d3484092e9abb7d"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-linux-aarch64.tar.gz"
+        sha256 "c8262e889990417c198a51adecbdf124622ebf0e5e2b8b6b8e77641b61fee2a5"
       end
       on_intel do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-linux-x86_64.tar.gz"
-        sha256 "9d8d33f40a70b2544f15c0a3758985a55c6cb9afcbe3ecf8203d1f74aa347429"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-linux-x86_64.tar.gz"
+        sha256 "2e78eaa08ced7231c643f59fcffce7d167c6c00b269a990bbb6777b7fcc45d82"
       end
     end
   end
@@ -32,22 +32,22 @@ class Lfff < Formula
   resource "gui" do
     on_macos do
       on_arm do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-gui-macos-aarch64.tar.gz"
-        sha256 "8829e570e161274e21e7317d1229ac6684ddbc2a7ea7e1bb76657b333384e2f4"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-gui-macos-aarch64.tar.gz"
+        sha256 "bb28c7587157285942def01fbbbc27f56d0073601926fd698c2b08a092d5aeac"
       end
       on_intel do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-gui-macos-x86_64.tar.gz"
-        sha256 "02631fce490909ed7894d09eda63c740f8e1f3340060eaa5bf629ec85dabdb20"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-gui-macos-x86_64.tar.gz"
+        sha256 "efe880af08370753169c8a3c88b9e6132516228fda01d1626d020feb60388e7e"
       end
     end
     on_linux do
       on_arm do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-gui-linux-aarch64.tar.gz"
-        sha256 "a521fca51c310b593b3fa0a3f809bea5b4bbe53a9da4fc0a4459951213a7ab93"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-gui-linux-aarch64.tar.gz"
+        sha256 "9b3a80ebcc94cd47d156cc0788adb07e185b5ee548d0b67494f0e6a035373bc6"
       end
       on_intel do
-        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v2.9.4/lfff-gui-linux-x86_64.tar.gz"
-        sha256 "55b3f58f5c7351ad90d999e7df105ac690243ebf2a0863e2ab6c59150daa0c78"
+        url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v3.0.0/lfff-gui-linux-x86_64.tar.gz"
+        sha256 "44dd910daedcab7ca09b259b29e4843e5d1b8bfd3cea69bbf8fc1db29cc12fc5"
       end
     end
   end
