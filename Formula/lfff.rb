@@ -54,23 +54,10 @@ class Lfff < Formula
 
   def install
     resource("cli").stage { bin.install "lfff" }
-    resource("gui").stage do
-      if OS.mac?
-        # The macOS archive holds a single directory, the .app, and stage
-        # enters a lone top-level directory: the block runs inside the bundle
-        # itself. Rebuild it under prefix either way.
-        app = prefix/"LibreFastbootFirmwareFlasher.app"
-        if File.directory?("LibreFastbootFirmwareFlasher.app")
-          prefix.install "LibreFastbootFirmwareFlasher.app"
-        else
-          app.install Dir["*"]
-        end
-        # A link, not a copy pulled out of the bundle: the .app must stay whole
-        # to start from Finder.
-        bin.install_symlink app/"Contents/MacOS/lfff-gui"
-      else
-        bin.install "lfff-gui"
-      end
+    # On macOS the app comes from the cask, which also pulls in this formula:
+    # installing it here too would clash over bin/lfff-gui.
+    unless OS.mac?
+      resource("gui").stage { bin.install "lfff-gui" }
     end
 
     generate_completions_from_executable(bin/"lfff", "completion")
@@ -79,14 +66,14 @@ class Lfff < Formula
   def caveats
     if OS.mac?
       <<~EOS
-        LibreFastbootFirmwareFlasher.app is installed in the Cellar. To use it from Launchpad / Finder:
-          cp -r #{prefix}/LibreFastbootFirmwareFlasher.app /Applications
+        This formula is the command-line tool. For the app:
+          brew install --cask librefastbootfirmwareflasher
       EOS
     end
   end
 
   test do
     assert_match version.to_s, shell_output("#{bin}/lfff --version")
-    assert_predicate bin/"lfff-gui", :exist?
+    assert_predicate bin/"lfff-gui", :exist? unless OS.mac?
   end
 end
