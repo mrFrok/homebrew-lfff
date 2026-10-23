@@ -1,9 +1,9 @@
 cask "librefastbootfirmwareflasher" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "3.3.1"
-  sha256 arm:   "4197f607957c2d77327ea5f8f645dc50f96ea3db88179f91195a2e71e2b41e72",
-         intel: "c5937a0eb32c4d86b3eb90f080ef622784b03bb9396acfbfd4f7b29143cb9382"
+  version "3.3.2"
+  sha256 arm:   "82df5e6dcf2356de6766ecb0897a405207b4ef5a91d49e5575f95a6a246a1d51",
+         intel: "7a21bbea2d124c1e3400e61a86e4b80cc0645667d66afcfda9fa510f517018d0"
 
   url "https://github.com/mrFrok/LibreFastbootFirmwareFlasher/releases/download/v#{version}/lfff-gui-macos-#{arch}.tar.gz"
   name "Libre Fastboot Firmware Flasher"
